@@ -1,0 +1,149 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import url(http://fonts.googleapis.com/css?family=Playfair-Display|Lobster-Regular);
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+.container {
+h1, h2, h3, h4  {
+  font-family: "Playfair Display";
+  font-weight: bold;
+}
+p, h5 {
+  font-weight: lighter;
+}
+}
+
+#profile-image {
+  max-width: 275px;
+  max-height: 250px;
+}
+
+#card-padding {
+  margin-bottom: 1rem;
+}
+
+#mini-img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+#event-desc {
+  margin-top: -125px;
+}
+
+footer {
+    font-size: 150%;
+  }
+
+
+.jumbotron {
+  background-image: url(http://i.imgur.com/kziAoNv.gif);
+  background-repeat: no-repeat;
+  margin-top: -50px;
+  background-position: 0%, 25%;
+  background-size: cover;
+  background-attachment: fixed;
+  top: 25%;
+  width: 100%;
+  height: 1000px;
+  text-align: center;
+  text-shadow: black 0.3em 0.3em 0.3em;
+  color: white;
+
+}
+form {
+  #dropdown-text {
+    color: black;
+  }
+}
+
+.login-type {
+  color: black;
+}
+
+.new-user-jumbo {
+  background-image: url(https://media.timeout.com/images/100521811/image.jpg);
+  background-repeat: no-repeat;
+  margin-top: -50px;
+  background-position: 0%, 25%;
+  background-size: cover;
+  background-attachment: fixed;
+  top: 25%;
+  width: 100%;
+  height: 1000px;
+  text-align: center;
+  text-shadow: black 0.3em 0.3em 0.3em;
+  color: white;
+}
+
+.navbar {
+  font-size: 175%;
+  font-family: "Playfair Display";
+  font-weight: 500;
+}
+
+.jumbotron {h1 {
+  font-family: "lobster-regular";
+}}
+
+ .digg_pagination {
+  background: white;
+  cursor: default;
+  /* self-clearing method: */ }
+  .digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+  .digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #2e6ab1;
+    color: white;
+    border: 1px solid #2e6ab1; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #105cb6;
+    border: 1px solid #9aafe5; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+  .digg_pagination .page_info {
+    background: #2e6ab1;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }

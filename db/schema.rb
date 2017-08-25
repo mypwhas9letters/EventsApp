@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170821204122) do
+ActiveRecord::Schema.define(version: 20170824220554) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "img"
   end
 
   create_table "category_events", force: :cascade do |t|
@@ -25,20 +26,31 @@ ActiveRecord::Schema.define(version: 20170821204122) do
 
   create_table "events", force: :cascade do |t|
     t.string "name"
+    t.string "address", default: "No address available."
+    t.string "description", default: "No description available."
     t.integer "location_id"
+    t.integer "the_date_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "the_date_id"
+    t.string "img", default: "http://lorempixel.com/400/300/nightlife/"
+    t.string "venue", default: "No venue available."
+    t.string "url"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
   end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "img"
   end
 
   create_table "the_dates", force: :cascade do |t|
-    t.datetime "date"
+    t.datetime "date_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -49,11 +61,15 @@ ActiveRecord::Schema.define(version: 20170821204122) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.text "bio"
     t.string "username"
     t.string "password_digest"
     t.integer "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "img"
   end
 
 end

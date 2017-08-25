@@ -1,0 +1,70 @@
+<div class="container">
+<h1><%=@user.first_name%>'s Event Page</h1>
+<div class="container">
+  <div class="row">
+    <img src=<%=@user.img%> class="img-thumbnail col-4" id="profile-image">
+    <h4 class="text-justify col-8">About Me: <span style="font-weight: lighter;"><%=@user.bio%></span></h4>
+  </div>
+</div>
+<br>
+
+<% if 0 > @user.events.count %>
+  <h2 class="font-italic" style="font-weight: lighter;">This is your dashboard! It gives you a snapshot of what your friends are up to. Go out and make some <a href="/users/<%=rand(40)%>">friends</a> or find an <a href="/events"> event</a>!</h2>
+<% end %>
+
+<h2 >Here are <%=@user.first_name%>'s upcoming events:</h2>
+<div class="container">
+<div class="row">
+    <% @events.each do |event| %>
+      <div class="col-sm-6 col-lg-3 col-md-4">
+       <div class="card">
+        <img class="card-img-top" src=<%=event.img%>>
+        <div class="card-body">
+          <h4><%= link_to event.name, event_path(event), class: "card-title text-uppercase" %></h4>
+          <p class="card-text">
+            <p><strong>Date:</strong> <%= link_to TheDate.format_date(event.the_date.date_time), the_date_path(event.the_date) %></p>
+            <p><strong>Location:</strong> <%= link_to event.location.name, location_path(event.location) %></p>
+          </p>
+          <% if current_user == @user %>
+        <%= link_to 'Remove From My Events', deleteevent_path(event), :method => :post, class: "btn btn-outline-danger"%>
+          <% else %>
+        <%= link_to 'Add to my events', addevent_path(event), :method => :post, class: "btn btn-outline-primary"%>
+        <%end%>
+        <br>
+      </div>
+    </div>
+    </div>
+    <%end%>
+</div>
+</div>
+<br>
+
+<h2>Followers</h2>
+<div class="container">
+<div class="row">
+  <% Friendship.where(friend_id: current_user.id).each do |friend| %>
+  <a href=<%=user_path(User.find_by_id(friend.user_id))%>><img src=<%=User.find_by_id(friend.user_id).img%> id="mini-img"></a>
+
+  <% end %>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <h3 class="col-4">Events in <%= link_to @user.location.name, location_path(@user.location)%></h3>
+  <h3 class="col-4"> <%= link_to "Events in Other Cities", locations_path%></h3>
+
+
+  <% if @user.id == current_user.id %>
+  <% elsif current_user.friends.find_by_id(@user.id) %>
+  <h5 class="col-4">You Follow <%= @user.first_name %></h5>
+  <%= link_to "Remove Follower", friendship_path(:friend_id => @user.id), :method => :delete, class: "btn-outline-danger btn-lg" %>
+    <% else %>
+  <%= link_to "Follow User", friendships_path(:friend_id => @user.id), :method => :post, class: "btn btn-outline-primary btn-lg" %>
+  <%end %>
+
+  <% if @user == current_user %>
+    <h4 class="col-4"><%= link_to "Edit Your Account", edit_user_path(@user), class: "btn btn-outline-secondary" %></h4>
+  <%end %>
+</div>
+</div>

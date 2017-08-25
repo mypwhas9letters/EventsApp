@@ -1,0 +1,19 @@
+<div class="container">
+
+<h1>Locations</h1>
+<div class="row">
+  <% @locations.each do |location| %>
+  <div class="col-sm-8">
+       <div class="card" id="card-padding">
+       <a href="locations/<%=location.id%>">
+        <img class="card-img-top" src=<%=location.img%>>
+        </a>
+        <div class="card-body">
+          <h4><%= link_to location.name, location_path(location), class: "card-title" %></h4>
+          <p class="card-text">
+      </div>
+    </div>
+    </div>
+    <% end %>
+</div>
+</div>

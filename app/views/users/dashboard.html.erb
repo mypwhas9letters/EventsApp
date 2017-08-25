@@ -1,0 +1,65 @@
+<div class="container">
+
+<h1>Hey <%= @user.first_name %>!</h1><br>
+
+<h2 class="font-italic" style="font-weight: lighter;">This is your dashboard! It gives you a snapshot of what your friends are up to. Go out and make some <a href="/users/<%=rand(40)%>">friends</a> or find an <a href="/events"> event</a>!</h2>
+<br>
+<br>
+
+
+<h2>What Your Friends Are Up To:</h2>
+<div class="container">
+<div class="row">
+  <% @user.friends.each do |friend| %>
+    <%  if friend.events.count > 0%>
+    <% event = friend.events.first %>
+      <div class="col-sm-6 col-lg-3 col-md-4">
+       <div class="card">
+        <img class="card-img-top" src=<%=event.img%>>
+        <div class="card-body">
+          <h4><%= friend.first_name %>'s Going </h4><h4> <%= link_to event.name, event_path(event), class: "card-title text-uppercase" %></h4>
+          <p class="card-text">
+            <p><strong>Date:</strong> <%= link_to TheDate.format_date(event.the_date.date_time), the_date_path(event.the_date) %></p>
+            <p><strong>Location:</strong> <%= event.location.name %></p>
+          </p>
+          <%= link_to 'Add to my events', addevent_path(event), :method => :post, class: "btn btn-outline-primary"%>
+        <br>
+      </div>
+    </div>
+    </div>
+    <%end%>
+    <%end%>
+</div>
+</div>
+
+<br>
+
+<h2>Followers</h2>
+<div class="container">
+<div class="row">
+<% if @friends.count > 0 %>
+  <% @friends.each do |friend| %>
+  <a href=<%=user_path(User.find_by_id(friend.user_id))%>><img src=<%=User.find_by_id(friend.user_id).img%> id="mini-img"></a>
+  <% end %>
+  <%else%>
+    <h3 class="font-italic" style="font-weight: lighter;">It's okay, we can't all have <a href="/users/<%=rand(40)%>">followers</a></h3>
+  <% end %>
+  </div>
+</div>
+<br>
+
+<h2>Following</h2>
+<div class="container">
+<div class="row">
+<% if @user.friends.count > 0 %>
+  <% @user.friends.each do |friend| %>
+<a href=<%=user_path(friend)%>><img src=<%=friend.img%> id="mini-img"></a>
+  <% end %>
+  <%else%>
+  <h3 class="font-italic" style="font-weight: lighter;">Go out and find some <a href="/users/<%=rand(40)%>">people</a> to stalk</h3>
+  <%end%>
+</div>
+</div>
+<br>
+
+</div>

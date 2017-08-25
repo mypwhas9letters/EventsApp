@@ -1,14 +1,161 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EventsApp</title>
+    <title>Let's Have Fun Together</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"></link>
+
   </head>
 
   <body>
-    <%= yield %>
+
+      <% if current_user %>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <%=link_to "LET'S", dashboard_path(current_user), class: "navbar-text"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+        <li class="nav-item"><%= link_to "Dashboard", dashboard_path(current_user), class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "#{current_user.first_name}'s Event Page", user_path(current_user), class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "All Events in #{current_user.location.name}", location_path(current_user.location), class: "nav-link" %></li>
+
+      <li class="nav-item dropdown ju">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Events
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <%= link_to "All Events", events_path, class: "dropdown-item" %>
+          <%= link_to "Events Today", the_date_path(134), class: "dropdown-item" %>
+          <%= link_to "Events By Category", categories_path, class: "dropdown-item" %>
+          <%= link_to "Events By Location", locations_path, class: "dropdown-item" %>
+        </div>
+      </li>
+        <li class="nav-item"><%= link_to "Log Out", logout_path, method: :delete, class: "nav-link" %></li>
+    </ul>
+      <form class="form-inline my-2 my-lg-0" action="/events" accept-charset="UTF-8" method="get">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="term" id="term">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+  </div>
+</nav>
+      <%else%>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-text" href="#">LET'S</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+        <li class="nav-item"><%= link_to "Login", login_path, class: "nav-link" %></li>
+      <li class="nav-item">
+        <li class="nav-item"><%= link_to "Sign Up", signup_path, class: "nav-link" %></li>
+    </ul>
+  </div>
+</nav>
+
+      <%end%>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+
+<br>
+  <footer class="page-footer center-on-small-only unique-color-dark pt-0"  style="background-color: silver">
+
+      <div style="background-color: grey;">
+          <div class="container">
+              <!--Grid row-->
+              <div class="row py-4 d-flex align-items-center">
+
+                  <!--Grid column-->
+                  <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                      <h6 class="mb-0 white-text" style="font-size: 150%; font-family: 'Playfair Display'; font-weight: bold">Get connected with us on social networks!</h6>
+                  </div>
+                  <!--Grid column-->
+
+                  <!--Grid column-->
+                  <div class="col-md-6 col-lg-7 text-center text-md-right">
+                      <!--Facebook-->
+                      <a class="icons-sm fb-ic ml-0"><i class="fa fa-facebook white-text mr-lg-4"> </i></a>
+                      <!--Twitter-->
+                      <a class="icons-sm tw-ic"><i class="fa fa-twitter white-text mr-lg-4"> </i></a>
+                      <!--Google +-->
+                      <a class="icons-sm gplus-ic"><i class="fa fa-google-plus white-text mr-lg-4"> </i></a>
+                      <!--Linkedin-->
+                      <a class="icons-sm li-ic"><i class="fa fa-linkedin white-text mr-lg-4"> </i></a>
+                      <!--Instagram-->
+                      <a class="icons-sm ins-ic"><i class="fa fa-instagram white-text mr-lg-4"> </i></a>
+                  </div>
+                  <!--Grid column-->
+
+              </div>
+              <!--Grid row-->
+          </div>
+      </div>
+
+      <!--Footer Links-->
+      <div class="container mt-5 mb-4 text-center text-md-left">
+          <div class="row mt-3">
+
+              <!--First column-->
+              <div class="col-md-6 col-lg-6 col-xl-4 mb-r">
+                  <h4 class="title font-bold"><strong>Lets Have Fun Together</strong></h4>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                  <p>We like to have fun with other people.</p>
+              </div>
+              <!--/.First column-->
+
+              <!--Third column-->
+              <% if current_user %>
+              <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-r">
+                  <h4 class="title font-bold"><strong>Useful links</strong></h4>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                  <p><a href="/users/<%=current_user.id%>/dashboard">Dashboard</a></p>
+                  <p><a href="/events">Events</a></p>
+                  <p><a href="/locations">Locations</a></p>
+              </div>
+              <%end%>
+              <!--/.Third column-->
+
+              <!--Fourth column-->
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                  <h4 class="title font-bold"><strong>Contact</strong></h4>
+                  <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                  <p><i class="fa fa-home mr-3"></i> 11 Broadway <br> New York, NY 10004</p>
+                  <p><i class="fa fa-envelope mr-3"></i> LETS@havefun.com</p>
+                  <p><i class="fa fa-phone mr-3"></i>646-212-FUN1</p>
+              </div>
+              <!--/.Fourth column-->
+
+          </div>
+      </div>
+
+      <div class="footer-copyright" style="background-color: grey;">
+          <div class="container-fluid" style="background-color: grey;">
+              © 2017 Copyright: <strong> Lets Have Fun Together</strong>
+          </div>
+      </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+   <script>
+  $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+  });
+  </script>
+
   </body>
+
 </html>

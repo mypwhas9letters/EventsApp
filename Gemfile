@@ -5,7 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'will_paginate', '~> 3.1.0'
+gem 'eventfulapi'
+gem 'bootstrap-sass'
+gem 'bcrypt'
+gem 'faker', '~>1.8.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.3'
 # Use sqlite3 as the database for Active Record
